@@ -17,3 +17,5 @@ app.get('/', (request, response) => {
 app.get('/line', (request, response) => {
     response.render("wholepage");
 })
+
+console.log("hello can you get me?");
