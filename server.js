@@ -18,6 +18,10 @@ app.get('/line', (request, response) => {
     response.render("wholepage");
 })
 
+app.get("/gravity", (request, response)=>{
+    response.render("bunchabubbles")
+})
+
 console.log("hello can you get me?");
 
 console.log("xiao test");

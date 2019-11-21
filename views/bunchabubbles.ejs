@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <canvas></canvas>
+</head>
+
+<body>
+
+  <script>
+
+    let clrsA = ["#CD88AF", "#AA5585", "#882D61", "#661141", "#440027"];
+    let clrs = clrsA;
+    let canvas = document.querySelector("canvas");
+    const context = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let gravity = 1;
+    let friction = .80;
+     let mouse = {
+      x: 0,
+      y: 0
+    };
+    window.addEventListener("mousemove", (event) => {
+      mouse.x = event.x;
+      mouse.y = event.y;
+    });
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init(500);
+    });
+    window.addEventListener("click", () => {
+      init(500);
+    });
+    function getRandomArbitrary(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+    class Circle {
+      constructor(color) {
+        this.color = color;
+        this.originalRadius = this.radius;
+        this.begin = 0;
+        this.end = Math.PI * 2;
+        this.mouseRangeInteract = 100;
+        this.growthRate = 4;
+        this.maxGrowth = (Math.random() * 100) + 10;
+        this.draw = () => {
+          this.context.beginPath();
+          this.context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          this.context.fillStyle = this.color;
+          this.context.fill();
+          this.context.stroke();
+          this.context.closePath();
+        };
+        this.update = () => {
+          if (this.x + this.radius > window.innerWidth || this.x - this.radius < 0) {
+            this.dx = -this.dx;
+          }
+          if (this.y + this.radius > window.innerHeight) {
+            this.dy = -this.dy * friction;
+            console.log(this.dy);
+          }
+          else {
+            this.dy += gravity;
+          }
+          this.y += this.dy;
+          this.x += this.dx;
+          this.draw();
+        };
+        this.canvas = canvas;
+        this.context = context;
+        this.radius = (Math.random() * 30) + 2;
+        this.originalRadius = this.radius;
+        this.x = Math.random() * (window.innerWidth - this.radius * 2) + this.radius;
+        this.y = Math.random() * (window.innerHeight - this.radius * 2) + this.radius;
+        this.dx = (Math.random() - .5) * 3;
+        this.dy = Math.random() * 20;
+      }
+    }
+    let allCircles = [];
+    function init(amount) {
+      allCircles = [];
+      for (let i = 0; i < amount; i++) {
+        allCircles.push(new Circle(clrs[Math.floor(Math.random() * clrs.length)]));
+      }
+      let testCircle = new Circle(clrsA[0]);
+      testCircle.draw();
+    }
+    function animate() {
+      requestAnimationFrame(animate);
+      context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      for (let c of allCircles) {
+        c.update();
+      }
+    }
+    animate();
+
+
+  </script>
+
+</body>
+
+</html>
