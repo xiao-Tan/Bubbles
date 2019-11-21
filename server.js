@@ -26,7 +26,7 @@ app.get("/bubble", (request, response)=>{
     response.render("bubble")
 })
 
-
-app.get("/spacecollide", (req, res)=>{
-    res.render("spaceCollide");
+app.get("/colide", (request, response)=>{
+    response.render("colide")
 })
+
