@@ -7,6 +7,15 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <canvas></canvas>
+  <style>
+    body{
+      background-image: url('images/background1.jpg');
+      background-color: rgba(255, 255, 255, 0.4);
+      background-blend-mode: lighten;
+      opacity: 0.8;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -20,7 +29,7 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     let gravity = 1;
-    let friction = .80;
+    let friction = .99;
      let mouse = {
       x: 0,
       y: 0

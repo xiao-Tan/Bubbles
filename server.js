@@ -22,8 +22,7 @@ app.get("/gravity", (request, response)=>{
     response.render("bunchabubbles")
 })
 
-console.log("hello can you get me?");
+app.get("/bubble", (request, response)=>{
+    response.render("bubble")
+})
 
-console.log("xiao test");
-
-console.log("a crucial change, with everything depending on this");
