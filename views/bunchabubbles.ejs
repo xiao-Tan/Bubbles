@@ -12,6 +12,8 @@
       background-image: url('images/background1.jpg');
       background-color: rgba(255, 255, 255, 0.4);
       background-blend-mode: lighten;
+      background-repeat: no-repeat;
+      background-size: cover;
       opacity: 0.8;
     }
   </style>
@@ -20,9 +22,14 @@
 
 <body>
 
-  <script>
+       <!-- <img src="static/images/BlueMoon.jpg" alt=""> -->
 
+  <script>
     let clrsA = ["#CD88AF", "#AA5585", "#882D61", "#661141", "#440027"];
+    let clrsB = ["#F8A6AC", "#CF676F", "#A6373F", "#7C151C", "#530006",];
+    let clrsC = ["#FFD1AA", "#D49A6A", "#AA6C39", "#804515", "#552600",];
+    let clrsD = ["#7BB992", "#4D9A6A", "#297B48", "#0F5D2C", "#003E17",];
+    let clrsE = ["#7F81B1", "#545894", "#333676", "#191C59", "#080B3B",];
     let clrs = clrsA;
     let canvas = document.querySelector("canvas");
     const context = canvas.getContext('2d');
@@ -108,7 +115,7 @@
       }
     }
     animate();
-
+    init(500);
 
   </script>
 
