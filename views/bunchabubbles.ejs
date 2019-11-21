@@ -12,6 +12,8 @@
       background-image: url('images/background1.jpg');
       background-color: rgba(255, 255, 255, 0.4);
       background-blend-mode: lighten;
+      background-repeat: no-repeat;
+      background-size: cover;
       opacity: 0.8;
     }
   </style>
@@ -20,17 +22,7 @@
 
 <body>
 
-    <style>
-        body {
-          background-image: url('images/BlueMoon.jpg');
-          background-color: rgba(255,255,255,.4);
-          background-blend-mode: lighten;
-          opacity : .8;
-        }
-        </style>
-
-
-        <!-- <img src="static/images/BlueMoon.jpg" alt=""> -->
+       <!-- <img src="static/images/BlueMoon.jpg" alt=""> -->
 
   <script>
     let clrsA = ["#CD88AF", "#AA5585", "#882D61", "#661141", "#440027"];
@@ -38,18 +30,14 @@
     let clrsC = ["#FFD1AA", "#D49A6A", "#AA6C39", "#804515", "#552600",];
     let clrsD = ["#7BB992", "#4D9A6A", "#297B48", "#0F5D2C", "#003E17",];
     let clrsE = ["#7F81B1", "#545894", "#333676", "#191C59", "#080B3B",];
-    let clrs = clrsE;
+    let clrs = clrsA;
     let canvas = document.querySelector("canvas");
     const context = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     let gravity = 1;
     let friction = .99;
-<<<<<<< HEAD
-    let mouse = {
-=======
      let mouse = {
->>>>>>> c65f8907c79a745be13f558ac09c81f8b18e403a
       x: 0,
       y: 0
     };
