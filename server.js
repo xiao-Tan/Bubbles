@@ -30,6 +30,6 @@ app.get("/colide", (request, response)=>{
     response.render("colide")
 })
 
-app.get("/lorax", (request, response) => {
+app.get("/loraxgrowth", (request, response) => {
     response.render("loraxgrowth");
 })

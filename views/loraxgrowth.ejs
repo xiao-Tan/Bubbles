@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <!-- <style>
+      body{
+        background-image: url('images/mars_surface.jpg');
+        background-color: rgba(255, 255, 255, 0.4);
+        background-blend-mode: lighten;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 0.8;
+      }
+    </style>
+   -->
 </head>
 <body>
     <canvas></canvas>
@@ -23,6 +34,14 @@ let clrsE = ["#7F81B1", "#545894", "#333676", "#191C59", "#080B3B",];
 let clrs = clrsD;
 function getColor(colorArr) {
     return colorArr[Math.floor(Math.random() * colorArr.length)];
+}
+
+function delay(milliseconds) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve();
+        }, milliseconds);
+    });
 }
 // ctx.arc(ourCanvas.width / 2, ourCanvas.height / 2, 300, 0, Math.PI * 2);
 // ctx.stroke();
@@ -58,13 +77,14 @@ class Shape {
     }
 }
 let allShapes = [];
-function init(howManyShapes) {
+async function init(howManyShapes) {
+
     for (let i = 0; i < howManyShapes; i++) {
         let radius = Math.random() * 150;
         allShapes.push(new Shape(Math.random() * (ourCanvas.width - 2 * radius) + radius, Math.random() * ourCanvas.height - 2 * radius + radius, radius));
     }
 }
-init(100);
+init(50);
 let divisor = 3.1;
 let globX = ourCanvas.width / divisor;
 let globY = ourCanvas.height / divisor;
@@ -75,13 +95,7 @@ for (let s of allShapes) {
         // s.shrinker(s.x, s.y, s.radius)
     }
 }
-function delay(milliseconds) {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve();
-        }, milliseconds);
-    });
-}
+
 async function animator() {
     // ctx.restore()
     requestAnimationFrame(animator);
