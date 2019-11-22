@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas></canvas>
+
+    <script >
+        "use strict";
+const ourCanvas = document.querySelector("canvas");
+const ctx = ourCanvas.getContext("2d");
+ourCanvas.width = window.innerWidth;
+ourCanvas.height = window.innerHeight;
+let clrsA = ["#CD88AF", "#AA5585", "#882D61", "#661141", "#440027"];
+let clrsB = ["#F8A6AC", "#CF676F", "#A6373F", "#7C151C", "#530006",];
+let clrsC = ["#FFD1AA", "#D49A6A", "#AA6C39", "#804515", "#552600",];
+let clrsD = ["#7BB992", "#4D9A6A", "#297B48", "#0F5D2C", "#003E17",];
+let clrsE = ["#7F81B1", "#545894", "#333676", "#191C59", "#080B3B",];
+let clrs = clrsD;
+function getColor(colorArr) {
+    return colorArr[Math.floor(Math.random() * colorArr.length)];
+}
+// ctx.arc(ourCanvas.width / 2, ourCanvas.height / 2, 300, 0, Math.PI * 2);
+// ctx.stroke();
+let amount = 10000;
+async function shrinker(x, y, radius) {
+    if (x > 0 && y > 0 && radius > 0) {
+        await delay(Math.random() * 500);
+        drawer(x, y, radius);
+        x -= Math.random() * 10;
+        y -= Math.random() * 10;
+        radius -= 2;
+        shrinker(x, y, radius);
+    }
+    else {
+        console.log("done");
+        return;
+    }
+    ;
+}
+function drawer(x, y, radius) {
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.fillStyle = getColor(clrsA);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+}
+class Shape {
+    constructor(x, y, radius) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+    }
+}
+let allShapes = [];
+function init(howManyShapes) {
+    for (let i = 0; i < howManyShapes; i++) {
+        let radius = Math.random() * 150;
+        allShapes.push(new Shape(Math.random() * (ourCanvas.width - 2 * radius) + radius, Math.random() * ourCanvas.height - 2 * radius + radius, radius));
+    }
+}
+init(100);
+let divisor = 3.1;
+let globX = ourCanvas.width / divisor;
+let globY = ourCanvas.height / divisor;
+for (let s of allShapes) {
+    if (s.x > 30 && s.y > 30 && s.radius > 2) {
+        shrinker(s.x, s.y, s.radius);
+        //when it was a class
+        // s.shrinker(s.x, s.y, s.radius)
+    }
+}
+function delay(milliseconds) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve();
+        }, milliseconds);
+    });
+}
+async function animator() {
+    // ctx.restore()
+    requestAnimationFrame(animator);
+    ctx.clearRect(0, 0, ourCanvas.width, ourCanvas.height);
+    // globX +=.01; globY += .01; howMany;
+    for (let s of allShapes) {
+        if (s.x > 30 && s.y > 30 && s.radius > 2) {
+            await delay(500);
+            shrinker(s.x, s.y, s.radius);
+            // s.shrinker(s.x, s.y, s.radius)
+        }
+    }
+    // for (let s of allShapes){
+    //     s.drawer();
+    // }
+    // caller(globX, globY, 300);
+}
+// animator();
+// caller(ourCanvas.width / divisor, ourCanvas.height / divisor, 300);
+// function caller(x: number, y: number, radius: number) {
+//     drawer(x,y, radius);
+//     if (x > 0 && radius > 0) {
+//         caller(x+15, y+5, radius-7)
+//     }
+// }
+// function drawer(x: number, y: number, radius: number){
+//     ctx.beginPath()
+//     ctx.rotate(1)
+//     ctx.arc(x, y, radius, 0, Math.PI*2);
+//     ctx.fillStyle = getColor(clrsA);
+//     ctx.fill();
+//     ctx.stroke();
+//     ctx.closePath();
+// }
+
+    </script>
+    
+</body>
+</html>
